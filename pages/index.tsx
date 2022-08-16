@@ -66,7 +66,6 @@ const Home: NextPage = () => {
               return (
                 <div>
                   <div className={styles.image_container}>
-                    <img src={item.img_src} alt="rover-image" onClick={() => { setDetails(item); router.push("/details"); setShowDetails(true) }} />
                     <div className={styles.image_container__hidden}>
                     </div>
                     <div className={styles.image_container__hidden__text}>
@@ -92,10 +91,6 @@ const Home: NextPage = () => {
         </div> : <GridLoader />}
       </div>
       {openModal && <Filter isClose={() => setModal(false)} isOpen={true} setFilteredData={setFilteredData} />}
-      <div className={styles.pagination}>
-        <button disabled={page >= 1} onClick={() => setPage(Number(page) - 1)}>Previous</button>
-        <button onClick={() => setPage(Number(page) + 1)}>Next</button>
-      </div>
     </div>
   )
 }

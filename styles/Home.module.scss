@@ -6,10 +6,6 @@
     opacity: 1;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    /* Media Query for low resolution  Tablets, Ipads */
-  //   @media (min-width: 481px) and (max-width: 767px) {
-  //     height: 70vh;
-  // }
 
     &__text {
       color: white;
@@ -82,12 +78,9 @@
     &__text {
       color: white;
       font-size: 16px;
-      padding: 16px 32px;
-      position: absolute;
+      padding: 5px 10px;
+      position: relative;
       z-index: 1;
-      margin-top: -134px;
-      // display: block;
-      // bottom: 12rem;
       &__caption_heading {
         font-size: 26px;
         font-weight: bold;
