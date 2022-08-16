@@ -5,15 +5,23 @@ import Select from '../../components/select';
 import styles from './filter.module.scss';
 import { Formik, Form } from 'formik';
 import Image from 'next/image';
-import CloseIcon from '../../public/close.png'
+import CloseIcon from '../../public/close.png';
 
-const Filter = ({ isOpen, isClose, setFilteredData }: any) => {
+export interface Props {
+  isOpen: boolean;
+  isClose: () => void;
+  setFilteredData: (data: {
+    earth_date: string, camera: string
+  }) => {};
+
+}
+
+const Filter = ({ isOpen, isClose, setFilteredData }: Props) => {
   const [selectCamera, setSelectedCamera] = useState({
     name: '',
     id: ''
   });
 
-  console.log(selectCamera)
 
 
   const handleSubmit = (values: any) => {

@@ -1,5 +1,4 @@
 export default function queryFormatter(url: string, queryObj: object) {
-  console.log(queryObj, "--querry")
   return Object.entries(queryObj).reduce((urlString, [query, value], index) => {
     if(value) {
       let string = `${urlString}${query}=${value}`;

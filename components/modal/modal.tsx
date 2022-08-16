@@ -10,16 +10,14 @@ export interface Props {
   isClose: () => void;
   width?: number;
   height?: number;
-  floatRight?: boolean;
-  size: string;
   defaultWidth?: boolean;
 
 }
 
-const Modal = ({ children, isOpen, isClose, width, height, floatRight, size }: Props) => (
-  <Dialog open={isOpen} onClose={isClose} className={classNames(floatRight ? styles.modal2 : styles.modal)}>
+const Modal = ({ children, isOpen, isClose, width, height }: Props) => (
+  <Dialog open={isOpen} onClose={isClose} className={styles.modal}>
     <div
-      className={classNames(floatRight ? styles.modal__content2 : styles.modal__content, styles[size])}
+      className={classNames(styles.modal__content)}
       style={{ width: `${width}px`, minHeight: `${height}` }}
     >
       <Dialog.Overlay className="" />
@@ -30,8 +28,6 @@ const Modal = ({ children, isOpen, isClose, width, height, floatRight, size }: P
 );
 
 Modal.defaultProps = {
-  floatRight: false,
-  size: 'lg',
   isClose: () => {}
 };
 

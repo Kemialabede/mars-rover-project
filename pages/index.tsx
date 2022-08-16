@@ -25,7 +25,7 @@ const Home: NextPage = () => {
 
   const url = queryFormatter('?', searchValue.camera === '' ? filterData : searchValue)
 
-  const { isLoading, isError, isSuccess, data } = useQuery(
+  const { isLoading, data } = useQuery(
     ["getAllRover", filterData, searchValue],
     () => api.get(url).then((res) => res.data
     ));
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
     <div className={styles.homepage}>
       <div className={styles.homepage__banner}>
         <h5 className={styles.homepage__banner__text}>Mars tugs at the human imagination like no other planet. With the force mighter than gravity. It attracts the eye to the shimmering red presence in the clear night</h5>
-        <SearchBox onChange={(e: any) => setSearchValue({ camera: e.target.value })} />
+        <SearchBox onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue({ camera: e.target.value })} />
       </div>
 
       <div className={styles.homepage__container}>
@@ -46,22 +46,29 @@ const Home: NextPage = () => {
           </div>
           <div className={styles.homepage__grid}>
             {data?.photos?.length ? data?.photos?.map((item: any) => {
-              const downloadImage = () => {
-                var element = document.createElement("a");
-                var file = new Blob(
-                  [
-                    item.img_src
-                  ],
-                  { type: "image/*" }
-                );
-                element.href = URL.createObjectURL(file);
-                element.download = "image.jpg";
-                element.click();
+              const downloadImage = (e: any) => {
+                fetch(e.target.href, {
+                  method: "GET",
+                  headers: {}
+                })
+                  .then(response => {
+                    response.arrayBuffer().then(function (buffer) {
+                      const url = window.URL.createObjectURL(new Blob([buffer]));
+                      const link = document.createElement("a");
+                      link.href = url;
+                      link.setAttribute("download", "image.jpg"); //or any other extension
+                      document.body.appendChild(link);
+                      link.click();
+                    });
+                  })
+                  .catch(err => {
+                    console.log(err);
+                  });
               };
               return (
                 <div>
                   <div className={styles.image_container}>
-                  <img src={item.img_src} alt="im" />
+                    <img src={item.img_src} alt="im" />
                     <div className={styles.image_container__hidden}>
                     </div>
                     <div className={styles.image_container__hidden__text}>
@@ -69,10 +76,10 @@ const Home: NextPage = () => {
                         <p className={styles.image_container__hidden__text__caption_heading}>{item.camera.full_name}</p>
                         <p>{dateFormatter(item.earth_date)}</p>
                         <div>
-                          <div className={styles.download_icon}>
+                          <a href={item.img_src} onClick={e => downloadImage(e)} className={styles.download_icon}>
                             <Image src={DownloadIcon} width={24} height={24} />
-                            <p onClick={downloadImage}>Download</p>
-                          </div>
+                            <p>Download</p>
+                          </a>
                         </div>
                       </div>
                       <div>
