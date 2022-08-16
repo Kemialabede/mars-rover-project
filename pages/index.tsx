@@ -18,29 +18,24 @@ const Home: NextPage = () => {
   const [filterData, setFilteredData] = useState({
     camera: 'fhaz'
   });
-  const [page, setPage] = useState(1);
-  const router = useRouter();
   const [openModal, setModal] = useState(false);
   const [searchValue, setSearchValue] = useState({
     camera: '',
-    page: page
   })
 
   const url = queryFormatter('?', searchValue.camera === '' ? filterData : searchValue)
 
   const { isLoading, isError, isSuccess, data } = useQuery(
-    ["getAllRover", filterData, searchValue, page],
+    ["getAllRover", filterData, searchValue],
     () => api.get(url).then((res) => res.data
     ));
-  const [details, setDetails] = useState({});
-  const [showDetails, setShowDetails] = useState(false)
 
 
   return (
     <div className={styles.homepage}>
       <div className={styles.homepage__banner}>
         <h5 className={styles.homepage__banner__text}>Mars tugs at the human imagination like no other planet. With the force mighter than gravity. It attracts the eye to the shimmering red presence in the clear night</h5>
-        <SearchBox onChange={(e: any) => setSearchValue({ camera: e.target.value, page: page })} />
+        <SearchBox onChange={(e: any) => setSearchValue({ camera: e.target.value })} />
       </div>
 
       <div className={styles.homepage__container}>
@@ -66,6 +61,7 @@ const Home: NextPage = () => {
               return (
                 <div>
                   <div className={styles.image_container}>
+                  <img src={item.img_src} alt="im" />
                     <div className={styles.image_container__hidden}>
                     </div>
                     <div className={styles.image_container__hidden__text}>
