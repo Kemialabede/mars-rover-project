@@ -12,9 +12,12 @@ import queryFormatter from '../helpers/queryFormatter';
 import api from '../services/api';
 import GridLoader from '../components/loader/loader';
 import dateFormatter from '../helpers/dateFormatter';
+import EmptyState from '../containers/emptyState/index';
 
 const Home: NextPage = () => {
-  const [filterData, setFilteredData] = useState({});
+  const [filterData, setFilteredData] = useState({
+    camera: 'fhaz'
+  });
   const [page, setPage] = useState(1);
   const router = useRouter();
   const [openModal, setModal] = useState(false);
@@ -22,8 +25,6 @@ const Home: NextPage = () => {
     camera: '',
     page: page
   })
-
-  console.log(page, "--page")
 
   const url = queryFormatter('?', searchValue.camera === '' ? filterData : searchValue)
 
@@ -49,7 +50,7 @@ const Home: NextPage = () => {
               <Image src={FilterIcon} width={24} height={24} /><p>Filter</p></div>
           </div>
           <div className={styles.homepage__grid}>
-            {data?.photos?.map((item: any) => {
+            {data?.photos?.length ? data?.photos?.map((item: any) => {
               const downloadImage = () => {
                 var element = document.createElement("a");
                 var file = new Blob(
@@ -86,7 +87,7 @@ const Home: NextPage = () => {
                   </div>
                 </div>
               )
-            })}
+            }) : <EmptyState />}
           </div>
         </div> : <GridLoader />}
       </div>
