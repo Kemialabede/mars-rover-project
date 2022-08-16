@@ -1,0 +1,20 @@
+.btn {
+    border-radius: 4px;
+    padding: 0 1.25rem;
+    height: 48px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    display: inline-flex;
+    background-color: black;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &.outline {
+        border: 2px solid #003bb3;
+        color: #003bb3;
+    }
+}

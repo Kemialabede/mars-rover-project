@@ -1,0 +1,19 @@
+.container {
+    padding: 15px 10px 15px 10px;
+    background-color: white;
+    width: 40%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+
+    @media (max-width: 480px) {
+        width: 75%;
+    }
+
+    input {
+        width: 70%;
+        border: none;
+        outline: none;
+    }
+}

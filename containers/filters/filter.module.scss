@@ -1,0 +1,22 @@
+.filter {
+    &__form {
+        input {
+            width: 100%;
+            color: #575a65;
+            padding: 0.25rem 1rem;
+            border-radius: 8px;
+            height: 48px;
+            border: 1px solid #ccc
+        }
+
+        &__field {
+            margin-top: 25px;
+        }
+
+        &__btn {
+            margin-top: 25px;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
