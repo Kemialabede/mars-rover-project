@@ -4,6 +4,8 @@ import Modal from '../../components/modal/modal'
 import Select from '../../components/select';
 import styles from './filter.module.scss';
 import { Formik, Form } from 'formik';
+import Image from 'next/image';
+import CloseIcon from '../../public/close.png'
 
 const Filter = ({ isOpen, isClose, setFilteredData }: any) => {
   const [selectCamera, setSelectedCamera] = useState({
@@ -15,7 +17,7 @@ const Filter = ({ isOpen, isClose, setFilteredData }: any) => {
 
 
   const handleSubmit = (values: any) => {
-    setFilteredData({...values, camera: selectCamera.id})
+    setFilteredData({ ...values, camera: selectCamera.id })
     isClose()
   };
 
@@ -51,7 +53,10 @@ const Filter = ({ isOpen, isClose, setFilteredData }: any) => {
 
   return (
     <Modal isOpen={isOpen} isClose={isClose} width={464} height={700}>
-      <h3>Filter</h3>
+      <div className={styles.filter__heading}>
+        <h3>Filter</h3>
+        <Image src={CloseIcon} alt="cancel" width={24} height={24} onClick={isClose} />
+      </div>
       <Formik initialValues={{ earth_date: '', camera: '' }} onSubmit={handleSubmit}>
         {(formik) => (
           <Form>
